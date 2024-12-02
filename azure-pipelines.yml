@@ -1,0 +1,48 @@
+trigger:
+  branches:
+    include:
+      - Taskmgr_v2  # Adjust the branch name as needed
+
+pool:
+  name: ubuntu_vm_agent  # This is the self-hosted agent pool you created earlier
+
+variables:
+  DOCKER_IMAGE: 'santoshnc26/taskmgr:latest'
+  DOCKER_REGISTRY: 'docker.io'
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildImage
+        steps:
+          - task: DockerInstaller@0  # Install Docker on the agent
+          - script: |
+              docker-compose build
+            displayName: 'Build Docker Image'
+
+  - stage: Push
+    jobs:
+      - job: PushImage
+        steps:
+          - task: DockerInstaller@0  # Install Docker on the agent
+          - script: |
+              echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+              docker-compose push
+            displayName: 'Push Docker Image to Hub'
+          - task: Docker@2  # Use Docker task to push the image
+
+  - stage: Deploy
+    jobs:
+      - job: DeployApp
+        steps:
+          - script: |
+              docker-compose up -d
+            displayName: 'Run Docker Container'
+
+  - stage: CleanUp
+    jobs:
+      - job: CleanUpContainers
+        steps:
+          - script: |
+              docker-compose down
+            displayName: 'Clean up Docker Containers'
