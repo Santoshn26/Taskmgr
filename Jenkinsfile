@@ -42,7 +42,8 @@ pipeline {
             steps {
                 script {
                     // Clean up any unused containers after testing/deployment
-                    sh 'docker-compose down'
+                    //sh 'docker-compose down'
+                    sh echo "not down"
                 }
             }
         }
