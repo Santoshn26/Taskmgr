@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        a {
+            text-decoration: none;o
+
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background: #ddd;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Task Manager</h1>
+        <p>Manage your tasks efficiently with our API!</p>
+    </header>
+    <main>
+        <p><strong>Available Endpoints:</strong></p>
+        <ul>
+            <li><a href="/tasks">View All Tasks</a> (GET)</li>
+            <li>Use <code>/tasks</code> (POST) to add tasks via JSON payload</li>
+        </ul>
+        <p>For more details, visit the API documentation or check the source code on <a href="https://github.com/your-repo" target="_blank">GitHub</a>.</p>
+    </main>
+    <footer>
+        &copy; 2024 Task Manager | Powered by Flask
+    </footer>
+</body>
+</html>
