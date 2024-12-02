@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   app:
     build:
@@ -13,7 +11,7 @@ services:
       FLASK_ENV: development
       MYSQL_HOST: db
       MYSQL_USER: root
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Ensure this variable is set
       MYSQL_DATABASE: task_manager
     networks:
       - taskmgr-network
@@ -22,7 +20,7 @@ services:
     image: mysql:8.0
     container_name: mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: Mrdev@0612
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  # From env file or CI secrets
       MYSQL_DATABASE: task_manager
     ports:
       - "3306:3306"
