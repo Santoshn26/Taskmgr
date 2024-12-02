@@ -1,16 +1,15 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from app.models import get_tasks, add_task
-from flask import render_template
 import os
 
-#print("Template folder:", app.template_folder)
-
 def register_routes(app):
+    # Define routes only once
     @app.route('/')
     def index():
-        print("Loading test.html")
-        print(os.listdir('templates'))  # Check if Flask can find the directory
-        return render_template('index.html')
+        print("Loading index.html")
+        print("Template folder:", app.template_folder) 
+        print(os.listdir(app.template_folder))  # Ensure Flask can find the templates
+        return render_template('index.html')  # Make sure index.html exists in templates folder
         
     @app.route('/tasks', methods=['GET'])
     def fetch_tasks():
