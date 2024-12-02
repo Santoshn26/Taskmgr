@@ -11,17 +11,13 @@ pipeline {
                 sh 'docker build -t taskmgr .'
             }
         }
-        stage('Tag and Push Docker Image') {
-            environment {
-                DOCKER_REGISTRY = 'docker.io' // Docker Hub
-                DOCKER_IMAGE = 'santoshn26/taskmgr:latest'
-            }
+        stage('Push Docker Image to Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin $DOCKER_REGISTRY
-                    docker tag taskmgr $DOCKER_IMAGE
-                    docker push $DOCKER_IMAGE
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    docker tag taskmgr Santoshn26/taskmgr:latest
+                    docker push Santoshn26/taskmgr:latest
                     '''
                 }
             }
