@@ -1,9 +1,11 @@
 from app import create_app
 from app.routes import register_routes
+from prometheus_flask_exporter import PrometheusMetrics
 import os
 
 app = create_app()  # Only create the app once here
 #register_routes(app)  # Register routes once
+metrics = PrometheusMetrics(app)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

@@ -3,3 +3,4 @@ flask
 python-dotenv
 flask-restful
 flask-mysql
+prometheus-flask-exporter
