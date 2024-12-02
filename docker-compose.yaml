@@ -6,12 +6,6 @@
       - "5000:5000"
     depends_on:
       - db
-    environment:
-      FLASK_ENV: development
-      MYSQL_HOST: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: task_manager
     networks:
       - taskmgr-network
 
