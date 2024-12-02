@@ -44,5 +44,5 @@ stages:
       - job: CleanUpContainers
         steps:
           - script: |
-              docker-compose down
+              #docker-compose down
             displayName: 'Clean up Docker Containers'
