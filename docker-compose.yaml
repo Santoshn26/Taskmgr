@@ -1,3 +1,6 @@
+version: "3.8"
+
+services:
   app:
     build:
       context: .
@@ -6,6 +9,12 @@
       - "5000:5000"
     depends_on:
       - db
+    environment:
+      FLASK_ENV: development
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: task_manager
     networks:
       - taskmgr-network
 
@@ -13,7 +22,7 @@
     image: mysql:8.0
     container_name: mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: Mrdev@0612
       MYSQL_DATABASE: task_manager
     ports:
       - "3306:3306"
@@ -21,3 +30,15 @@
       - db_data:/var/lib/mysql
     networks:
       - taskmgr-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+networks:
+  taskmgr-network:
+
+volumes:
+  db_data:
