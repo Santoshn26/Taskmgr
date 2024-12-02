@@ -16,8 +16,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker tag taskmgr Santoshn26/taskmgr:latest
-                    docker push Santoshn26/taskmgr:latest
+                    docker tag taskmgr santoshnc26/taskmgr:latest
+                    docker push santoshnc26/taskmgr:latest
                     '''
                 }
             }
