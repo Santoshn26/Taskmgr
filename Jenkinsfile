@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/Santoshn26/Taskmgr.git'
+                git branch: 'Taskmgr_v2', url: 'https://github.com/Santoshn26/Taskmgr.git'
             }
         }
         stage('Build Docker Images with Docker Compose') {
