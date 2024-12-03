@@ -5,6 +5,18 @@ pipeline {
         DOCKER_REGISTRY = 'docker.io'
     }
     stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/Taskmgr_v2']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    userRemoteConfigs: [[url: 'https://github.com/Santoshn26/Taskmgr.git']]
+                ])
+            }
+        }
+        
         stage('Cleanup Existing Containers') {
             steps {
                 script {
