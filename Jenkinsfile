@@ -3,6 +3,9 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'santoshnc26/taskmgr:latest'
         DOCKER_REGISTRY = 'docker.io'
+        SONAR_PROJECT_KEY = 'TaskMgr'
+        SONAR_HOST_URL = 'http://192.168.29.142:9000'
+        SONAR_LOGIN = 'sqa_c32897d635f2e817fbf9bd67be5f8a42eefc86b3' // Replace with token
     }
     stages {
         stage('Checkout SCM') {
@@ -14,6 +17,19 @@ pipeline {
                     extensions: [],
                     userRemoteConfigs: [[url: 'https://github.com/Santoshn26/Taskmgr.git']]
                 ])
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                    sonar-scanner \
+                        -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=$SONAR_HOST_URL \
+                        -Dsonar.login=$SONAR_LOGIN
+                    '''
+                }
             }
         }
 
