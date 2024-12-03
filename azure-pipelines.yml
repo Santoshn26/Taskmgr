@@ -44,5 +44,5 @@ stages:
       - job: CleanUpContainers
         steps:
           - script: |
-              #docker-compose down
+             echo "Cleanup Disabled"
             displayName: 'Clean up Docker Containers'

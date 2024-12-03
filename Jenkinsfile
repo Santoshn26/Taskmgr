@@ -60,7 +60,8 @@ pipeline {
     }
     post {
         always {
-            cleanWs()
+            //cleanWs()
+            echo "Cleanup Disabled"
         }
     }
 }
