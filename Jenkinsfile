@@ -5,6 +5,16 @@ pipeline {
         DOCKER_REGISTRY = 'docker.io'
     }
     stages {
+        stage('Cleanup Existing Containers') {
+            steps {
+                script {
+                    sh '''
+                    # Stop and remove existing containers if they exist
+                    docker ps -aq --filter "name=flask-app" | xargs -r docker rm -f
+                    docker ps -aq --filter "name=mysql-db" | xargs -r docker rm -f
+                    '''
+             }
+        }
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/Santoshn26/Taskmgr.git'
