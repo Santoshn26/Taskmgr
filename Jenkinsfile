@@ -27,7 +27,12 @@ pipeline {
                         -Dsonar.projectKey=$SONAR_PROJECT_KEY \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=$SONAR_HOST_URL \
-                        -Dsonar.login=$SONAR_LOGIN
+                        -Dsonar.token=$SONAR_LOGIN
+                        -Dsonar.exclusions=venv/**,node_modules/**
+                        -Dsonar.python.version=3.12
+                        -Dsonar.sourceEncoding=UTF-8 \
+                        -Dsonar.python.coverage.reportPaths=coverage.xml
+
                     '''
                 }
             }
